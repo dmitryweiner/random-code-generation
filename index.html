@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random code generation</title>
+    <script type="application/javascript">
+
+        var genomes = [],
+        GENOMES_INITIAL_COUNT = 1000,
+        GENOME_INITIAL_LENGTH = 1000,
+        FINAL_ERROR_RATE = 0.1;
+
+        function getGenome(length) {
+            var result = "";
+            var possible = "abcdefghijklmnopqrstuvwxyz0123456789,.;{}()[]'=<>*/+-";
+
+            for (var i = 0; i < length; i++)
+                result += possible.charAt(Math.floor(Math.random() * possible.length));
+
+            return result;
+        }
+
+        function generate() {
+            for (var i = 0; i < GENOMES_INITIAL_COUNT; i++) {
+                genomes.push(getGenome(GENOME_INITIAL_LENGTH));
+            }
+        }
+
+        function test(genome) {
+            var result = 0;
+            try {
+                result = eval(genome);
+            } catch(error) {
+                result = 0;
+            }
+            return result;
+        }
+
+        function evolve() {
+            var errorRate = 1;
+            generate();
+
+            do {
+                for (genomeIndex in genomes) {
+                    if (genomes.hasOwnProperty(genomeIndex)) {
+
+                    }
+                }
+            } while (errorRate < FINAL_ERROR_RATE);
+        }
+
+        function ready() {
+            var buttonElement = document.getElementById("generateButton");
+            buttonElement.addEventListener("click", evolve);
+        }
+
+        document.addEventListener("DOMContentLoaded", ready);
+    </script>
+</head>
+<body>
+Results:
+<div id="results">
+</div>
+<button id="generateButton" value="Generate">Generate</button>
+</body>
+</html>
